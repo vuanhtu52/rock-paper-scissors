@@ -1,3 +1,9 @@
+function capitalize(text) {
+    text = text.toLowerCase();
+    text = text.charAt(0).toUpperCase() + text.slice(1);
+    return text;
+}
+
 function getComputerChoice() {
     // Generate random number between 0 and 2
     num = Math.floor(Math.random() * (3 - 0)) + 0;
@@ -14,25 +20,52 @@ function getComputerChoice() {
 function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
     computerSelection = computerSelection.toLowerCase();
-    let result;
+
+    let winner;
     // Result is tie
     if (playerSelection === computerSelection) {
-        result = `Tie! Both thew ${playerSelection.charAt(0).toUpperCase()}${playerSelection.slice(1)}`
+        winner = "tie";
     // Result is win
     } else if ((playerSelection == "paper" && computerSelection == "rock") || (playerSelection == "scissor" && computerSelection == "paper") || (playerSelection == "rock" && computerSelection == "scissor")) {
-        result = `You Win! ${playerSelection.charAt(0).toUpperCase()}${playerSelection.slice(1)} beats ${computerSelection.charAt(0).toUpperCase()}${computerSelection.slice(1)}`;
+        winner = "player";
     // Result is lose
     } else {
-        result = `You Lose! ${computerSelection.charAt(0).toUpperCase()}${computerSelection.slice(1)} beats ${playerSelection.charAt(0).toUpperCase()}${playerSelection.slice(1)}`;
+        winner = "computer";
     }
 
-    return result;
+    return winner;
 }
 
 function game() {
-    // Get input from user
-    input = prompt("Please provide your selection", "")
-    console.log(input)
+    let playerScore = 0;
+    let computerScore = 0;
+    for (let i = 0; i < 5; i++) {
+        // Get input from user
+        let playerSelection = prompt("Please provide your selection", "");
+
+        // Play
+        const computerSelection = getComputerChoice();
+        let winner = playRound(playerSelection, computerSelection);
+        if (winner == "tie") {
+            console.log(`Round ${i+1}: Tie! Both thew ${capitalize(playerSelection)}`)
+        } else if (winner == "player") {
+            playerScore += 1;
+            console.log(`Round ${i+1}: You win! ${capitalize(playerSelection)} beats ${capitalize(computerSelection)}`)
+        } else {
+            computerScore += 1;
+            console.log(`Round ${i+1}: You lose! ${capitalize(computerSelection)} beats ${capitalize(playerSelection)}`)
+        }
+    }
+
+    // Calculate final result
+    console.log(`Final result: Player ${playerScore}, Computer ${computerScore}`)
+    if (playerScore === computerScore) {
+        console.log("No winner!")
+    } else if (playerScore > computerScore) {
+        console.log("You win!")
+    } else {
+        console.log("You lose!")
+    }
 }
 
 game();
