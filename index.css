@@ -71,6 +71,7 @@ body {
     display: flex;
     justify-content: center;
     gap: 64px;
+    flex-wrap: wrap;
 }
 
 .option {
