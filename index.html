@@ -5,9 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
     <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="index.js" defer></script>
 </head>
 <body>
     <div class="header">Rock Paper Scissors</div>
+
+    <div class="content">
+        <div class="instruction">
+            <div id="title">Pick a weapon</div>
+            <div id="sub-text">First to reach 5 points wins the game</div>
+        </div>
+        <div class="display-wrapper">
+            <div class="display">
+                <div class="avatar">🧑</div>
+                <div class="result">Player: 0</div>
+                <div class="selection">✊</div>
+            </div>
+            <div class="display">
+                <div class="avatar">🤖</div>
+                <div class="result">Computer: 0</div>
+                <div class="selection">✌</div>
+            </div>
+        </div> 
+        <div class="round-message">You won this round. Rock beats scissors!</div>
+        <div class="options">
+            <div class="option">
+                <button>✊</button>
+            </div>
+            <div class="option">
+                <button>✋</button>
+            </div>
+            <div class="option">
+                <button>✌</button>
+            </div>
+        </div>
+        <button id="new-game">New Game</button>
+    </div>
+
+    <div class="footer">Copyright © 2023 vuanhtu52</div>
 </body>
 </html>
