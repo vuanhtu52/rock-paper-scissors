@@ -3,6 +3,8 @@ PAPER_SYMBOL = "✋";
 SCISSORS_SYMBOL = "✌";
 
 let roundNumber = 0;
+let playerScore = 0;
+let computerScore = 0;
 
 function capitalize(text) {
     text = text.toLowerCase();
@@ -74,10 +76,36 @@ function game() {
     }
 }
 
-// Add event listern for rock, paper and scissors buttons
-const buttons = document.querySelectorAll(".option");
+function resetGame() {
+    // Reset scores
+    playerScore = 0;
+    computerScore = 0;
+    console.log("Player reset: ", playerScore);
+    console.log("Computer reset: ", computerScore);
+    // Reset score displays
+    const playerResultDiv = document.querySelector("#player-result");
+    playerResultDiv.textContent = `Player: ${playerScore}`;
+    const computerResultDiv = document.querySelector("#computer-result");
+    computerResultDiv.textContent = `Computer: ${computerScore}`;
+    console.log("Reset")
+}
+
+// Add event listener for rock, paper and scissors buttons
+const buttons = document.querySelectorAll(".choice");
 buttons.forEach(element => {
     element.addEventListener("click", () => {
+        console.log("Player: ", playerScore);
+        console.log("Computer: ", computerScore);
+        // Create a pop-up message when the game is over
+        if (playerScore === 5) {
+            alert("You won the game.");
+            resetGame();
+        }
+        if (computerScore === 5) {
+            alert("You lost the game.")
+            resetGame();
+        }
+
         // Play the game and returns the winner
         let playerChoice = element.id;
         let computerChoice = getComputerChoice();
@@ -86,12 +114,10 @@ buttons.forEach(element => {
         // Update the scores for player and computer
         if (winner === "player") {
             const resultDiv = document.querySelector("#player-result");
-            let playerScore = parseInt(resultDiv.textContent.split(" ")[1]);
             playerScore += 1;
             resultDiv.textContent = `Player: ${playerScore.toString()}`;
         } else if (winner === "computer") {
             const resultDiv = document.querySelector("#computer-result");
-            let computerScore = parseInt(resultDiv.textContent.split(" ")[1]);
             computerScore += 1;
             resultDiv.textContent = `Computer: ${computerScore.toString()}`;
         }
@@ -124,10 +150,7 @@ buttons.forEach(element => {
         } else if (winner === "player") {
             messageDiv.textContent = `Round ${roundNumber}: You win this round! ${capitalize(playerChoice)} beats ${capitalize(computerChoice)}`;
         } else {
-            messageDiv.textContent = `Round ${roundNumber}: You lose this round! ${capitalize(computerChoice)} beats ${capitalize(computerChoice)}`;
+            messageDiv.textContent = `Round ${roundNumber}: You lose this round! ${capitalize(computerChoice)} beats ${capitalize(playerChoice)}`;
         }
-
-        // Create a pop-up message when the game is over
-        
     })
 })
