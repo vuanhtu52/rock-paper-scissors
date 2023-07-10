@@ -1,3 +1,7 @@
+ROCK_SYMBOL = "✊";
+PAPER_SYMBOL = "✋";
+SCISSORS_SYMBOL = "✌";
+
 function capitalize(text) {
     text = text.toLowerCase();
     text = text.charAt(0).toUpperCase() + text.slice(1);
@@ -75,21 +79,41 @@ const buttons = document.querySelectorAll(".option");
 buttons.forEach(element => {
     element.addEventListener("click", () => {
         // Play the game and returns the winner
-        winner = playRound(element.id, getComputerChoice());
-        // If player wins the round
+        let playerChoice = element.id;
+        let computerChoice = getComputerChoice();
+        winner = playRound(playerChoice, computerChoice);
+
+        // Update the scores for player and computer
         if (winner === "player") {
-            // Set new score
             const resultDiv = document.querySelector("#player-result");
             let playerScore = parseInt(resultDiv.textContent.split(" ")[1]);
             playerScore += 1;
             resultDiv.textContent = `Player: ${playerScore.toString()}`;
-        // If computer wins the round
         } else if (winner === "computer") {
-            // Set new score
             const resultDiv = document.querySelector("#computer-result");
             let computerScore = parseInt(resultDiv.textContent.split(" ")[1]);
             computerScore += 1;
             resultDiv.textContent = `Computer: ${computerScore.toString()}`;
+        }
+
+        // Display correct symbol based on player's choice
+        const playerDiv = document.querySelector("#player-selection");
+        if (playerChoice === "rock") {
+            playerDiv.textContent = ROCK_SYMBOL;
+        } else if (playerChoice === "paper") {
+            playerDiv.textContent = PAPER_SYMBOL;
+        } else {
+            playerDiv.textContent = SCISSORS_SYMBOL;
+        }
+
+        // Display correct symbol based on computer's choice
+        const computerDiv = document.querySelector("#computer-selection");
+        if (computerChoice === "rock") {
+            computerDiv.textContent = ROCK_SYMBOL;
+        } else if (computerChoice === "paper") {
+            computerDiv.textContent = PAPER_SYMBOL;
+        } else {
+            computerDiv.textContent = SCISSORS_SYMBOL;
         }
     })
 })
