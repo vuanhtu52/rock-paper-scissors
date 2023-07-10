@@ -2,6 +2,8 @@ ROCK_SYMBOL = "✊";
 PAPER_SYMBOL = "✋";
 SCISSORS_SYMBOL = "✌";
 
+let roundNumber = 0;
+
 function capitalize(text) {
     text = text.toLowerCase();
     text = text.charAt(0).toUpperCase() + text.slice(1);
@@ -72,8 +74,6 @@ function game() {
     }
 }
 
-// game();
-
 // Add event listern for rock, paper and scissors buttons
 const buttons = document.querySelectorAll(".option");
 buttons.forEach(element => {
@@ -114,6 +114,20 @@ buttons.forEach(element => {
             computerDiv.textContent = PAPER_SYMBOL;
         } else {
             computerDiv.textContent = SCISSORS_SYMBOL;
+        } 
+
+        // Display message for current round
+        const messageDiv = document.querySelector(".round-message");
+        roundNumber += 1;
+        if (winner === "tie") {
+            messageDiv.textContent = `Round ${roundNumber}: Tie! Both threw ${capitalize(playerChoice)}`;
+        } else if (winner === "player") {
+            messageDiv.textContent = `Round ${roundNumber}: You win this round! ${capitalize(playerChoice)} beats ${capitalize(computerChoice)}`;
+        } else {
+            messageDiv.textContent = `Round ${roundNumber}: You lose this round! ${capitalize(computerChoice)} beats ${capitalize(computerChoice)}`;
         }
+
+        // Create a pop-up message when the game is over
+        
     })
 })
