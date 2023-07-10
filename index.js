@@ -9,11 +9,11 @@ function getComputerChoice() {
     num = Math.floor(Math.random() * (3 - 0)) + 0;
     // Map the number to the result
     if (num === 0) {
-        return "Rock";
+        return "rock";
     } else if (num === 1) {
-        return "Paper";
+        return "paper";
     } else {
-        return "Scissor"
+        return "scissors"
     }
 }
 
@@ -26,7 +26,7 @@ function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
         winner = "tie";
     // Result is win
-    } else if ((playerSelection == "paper" && computerSelection == "rock") || (playerSelection == "scissor" && computerSelection == "paper") || (playerSelection == "rock" && computerSelection == "scissor")) {
+    } else if ((playerSelection == "paper" && computerSelection == "rock") || (playerSelection == "scissors" && computerSelection == "paper") || (playerSelection == "rock" && computerSelection == "scissors")) {
         winner = "player";
     // Result is lose
     } else {
@@ -69,3 +69,27 @@ function game() {
 }
 
 // game();
+
+// Add event listern for rock, paper and scissors buttons
+const buttons = document.querySelectorAll(".option");
+buttons.forEach(element => {
+    element.addEventListener("click", () => {
+        // Play the game and returns the winner
+        winner = playRound(element.id, getComputerChoice());
+        // If player wins the round
+        if (winner === "player") {
+            // Set new score
+            const resultDiv = document.querySelector("#player-result");
+            let playerScore = parseInt(resultDiv.textContent.split(" ")[1]);
+            playerScore += 1;
+            resultDiv.textContent = `Player: ${playerScore.toString()}`;
+        // If computer wins the round
+        } else if (winner === "computer") {
+            // Set new score
+            const resultDiv = document.querySelector("#computer-result");
+            let computerScore = parseInt(resultDiv.textContent.split(" ")[1]);
+            computerScore += 1;
+            resultDiv.textContent = `Computer: ${computerScore.toString()}`;
+        }
+    })
+})
