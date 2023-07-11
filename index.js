@@ -44,38 +44,6 @@ function playRound(playerSelection, computerSelection) {
     return winner;
 }
 
-function game() {
-    let playerScore = 0;
-    let computerScore = 0;
-    for (let i = 0; i < 5; i++) {
-        // Get input from user
-        let playerSelection = prompt("Please provide your selection", "");
-
-        // Play
-        const computerSelection = getComputerChoice();
-        let winner = playRound(playerSelection, computerSelection);
-        if (winner == "tie") {
-            console.log(`Round ${i+1}: Tie! Both thew ${capitalize(playerSelection)}`)
-        } else if (winner == "player") {
-            playerScore += 1;
-            console.log(`Round ${i+1}: You win! ${capitalize(playerSelection)} beats ${capitalize(computerSelection)}`)
-        } else {
-            computerScore += 1;
-            console.log(`Round ${i+1}: You lose! ${capitalize(computerSelection)} beats ${capitalize(playerSelection)}`)
-        }
-    }
-
-    // Calculate final result
-    console.log(`Final result: Player ${playerScore}, Computer ${computerScore}`)
-    if (playerScore === computerScore) {
-        console.log("No winner!")
-    } else if (playerScore > computerScore) {
-        console.log("You win!")
-    } else {
-        console.log("You lose!")
-    }
-}
-
 function resetGame() {
     // Reset scores
     playerScore = 0;
@@ -169,7 +137,7 @@ buttons.forEach(element => {
     })
 })
 
-// Reset the game when user click the new game button
+// Reset the game when user clicks the new game button
 const newGameButton = document.querySelector("#new-game");
 newGameButton.addEventListener("click", () => {
     resetGame();
