@@ -121,30 +121,16 @@ buttons.forEach(element => {
         if (playerScore === 5) {
             requestAnimationFrame(() => {
                 requestAnimationFrame(() => {
-                    Swal.fire({
-                        title: "You won the game.",
-                        confirmButtonText: "Play Again",
-                        allowOutsideClick: false
-                    }).then(result => {
-                        if (result.isConfirmed) {
-                            resetGame();
-                        }
-                    })
+                    alert("You won the game.");
+                    resetGame();
                 })
             })
         }
         if (computerScore === 5) {
             requestAnimationFrame(() => {
                 requestAnimationFrame(() => {
-                    Swal.fire({
-                        title: "You lost the game.",
-                        confirmButtonText: "Play Again",
-                        allowOutsideClick: false
-                    }).then(result => {
-                        if (result.isConfirmed) {
-                            resetGame();
-                        }
-                    })
+                    alert("You lost the game.");
+                    resetGame();
                 })
             })
         }

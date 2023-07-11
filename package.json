@@ -1,6 +1,1 @@
-{
-  "dependencies": {
-    "@sweetalert2/themes": "^5.0.15",
-    "sweetalert2": "^11.7.12"
-  }
-}
+{}
