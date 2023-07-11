@@ -80,32 +80,27 @@ function resetGame() {
     // Reset scores
     playerScore = 0;
     computerScore = 0;
-    console.log("Player reset: ", playerScore);
-    console.log("Computer reset: ", computerScore);
     // Reset score displays
     const playerResultDiv = document.querySelector("#player-result");
     playerResultDiv.textContent = `Player: ${playerScore}`;
     const computerResultDiv = document.querySelector("#computer-result");
     computerResultDiv.textContent = `Computer: ${computerScore}`;
-    console.log("Reset")
+    // Reset symbol displays
+    const playerDiv = document.querySelector("#player-selection");
+    playerDiv.textContent = "?";
+    const computerDiv = document.querySelector("#computer-selection");
+    computerDiv.textContent = "?";
+    // Reset message
+    const messageDiv = document.querySelector(".round-message");
+    messageDiv.textContent = "--"; 
+    // Reset roundNumber
+    roundNumber = 0;
 }
 
 // Add event listener for rock, paper and scissors buttons
 const buttons = document.querySelectorAll(".choice");
 buttons.forEach(element => {
     element.addEventListener("click", () => {
-        console.log("Player: ", playerScore);
-        console.log("Computer: ", computerScore);
-        // Create a pop-up message when the game is over
-        if (playerScore === 5) {
-            alert("You won the game.");
-            resetGame();
-        }
-        if (computerScore === 5) {
-            alert("You lost the game.")
-            resetGame();
-        }
-
         // Play the game and returns the winner
         let playerChoice = element.id;
         let computerChoice = getComputerChoice();
@@ -151,6 +146,25 @@ buttons.forEach(element => {
             messageDiv.textContent = `Round ${roundNumber}: You win this round! ${capitalize(playerChoice)} beats ${capitalize(computerChoice)}`;
         } else {
             messageDiv.textContent = `Round ${roundNumber}: You lose this round! ${capitalize(computerChoice)} beats ${capitalize(playerChoice)}`;
+        }
+
+        // Create a pop-up message when the game is over
+        // The nested requestAnimationFrame is to wait for the screen to refresh with the latest updates
+        if (playerScore === 5) {
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    alert("You won the game.");
+                    resetGame();
+                })
+            })
+        }
+        if (computerScore === 5) {
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    alert("You lost the game.")
+            resetGame();
+                })
+            })
         }
     })
 })
