@@ -65,6 +65,31 @@ function resetGame() {
     roundNumber = 0;
 }
 
+function openPopup(winner) {
+    // Open popup
+    const popup = document.querySelector(".popup");
+    popup.classList.add("open-popup");
+    // Display result
+    const messageDiv = document.querySelector(".popup > div");
+    if (winner === "player") {
+        messageDiv.textContent = "You won the game!";
+    } else {
+        messageDiv.textContent = "You lost...";
+    }
+    // Add overlay to prevent user from clicking
+    const overlay = document.querySelector(".overlay");
+    overlay.classList.add("overlay-active");
+}
+
+function closePopup() {
+    // Close popup
+    const popup = document.querySelector(".popup");
+    popup.classList.remove("open-popup");
+    // Remove overlay
+    const overlay = document.querySelector(".overlay");
+    overlay.classList.remove("overlay-active");
+}
+
 // Add event listener for rock, paper and scissors buttons
 const buttons = document.querySelectorAll(".choice");
 buttons.forEach(element => {
@@ -121,16 +146,14 @@ buttons.forEach(element => {
         if (playerScore === 5) {
             requestAnimationFrame(() => {
                 requestAnimationFrame(() => {
-                    alert("You won the game.");
-                    resetGame();
+                    openPopup("player");
                 })
             })
         }
         if (computerScore === 5) {
             requestAnimationFrame(() => {
                 requestAnimationFrame(() => {
-                    alert("You lost the game.");
-                    resetGame();
+                    openPopup("computer");
                 })
             })
         }
@@ -141,4 +164,11 @@ buttons.forEach(element => {
 const newGameButton = document.querySelector("#new-game");
 newGameButton.addEventListener("click", () => {
     resetGame();
+})
+
+// Reset the game when user clicks the new game button from popup
+const popupButton = document.querySelector(".popup > button");
+popupButton.addEventListener("click", () => {
+    resetGame();
+    closePopup();
 })
