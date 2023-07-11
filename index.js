@@ -168,3 +168,9 @@ buttons.forEach(element => {
         }
     })
 })
+
+// Reset the game when user click the new game button
+const newGameButton = document.querySelector("#new-game");
+newGameButton.addEventListener("click", () => {
+    resetGame();
+})
